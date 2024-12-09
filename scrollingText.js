@@ -1,10 +1,16 @@
-function scrollText(screen) {
+function scrollText(screen, text) {
   let frames = "";
 
-  for (let index = 0; index < screen.length; index++) {
+  for (const char of text) {
     frames += screen.join("");
-    const char = screen.shift();
+    screen.shift();
     screen.push(char);
+  }
+
+  for (let index = 0; index < text.length; index++) {
+    frames += screen.join("");
+    screen.shift();
+    screen.push(" ");
   }
 
   return frames;
@@ -16,12 +22,11 @@ function displayAnimFormat(width, height, frames) {
 }
 
 function main() {
-  const text = "Hello";
-  const width = 20;
-  const screen = (text.padStart(width)).split("");
+  const text = "Welcome to BMTC";
+  const screen = (" ".repeat(text.length)).split("");
 
   const frames = scrollText(screen, text);
-  displayAnimFormat(width, 1, frames);
+  displayAnimFormat(text.length, 1, frames);
 }
 
 main();
